@@ -1,19 +1,30 @@
 = GraphQL Song
 :toc:
 
+image:https://github.com/Softsapiens/graphql-song/workflows/Rust/badge.svg[]
+
 == Abstract
 
-
+This is a wip link:https://www.rust-lang.org/[Rust] project for link:https://graphql.org[GraphQL] learning.
 
 == Tech-Stack
 
-Rust
-Hyper
-Juniper
-Elasticsearch
+Principal technologies used are the following:
+
+link:https://www.rust-lang.org/[Rust] stable
+link:https://docs.rs/hyper/0.13.5/hyper/[Hyper]
+link:https://docs.rs/juniper/0.14.2/juniper/[Juniper]
+link:https://docs.rs/elasticsearch/7.7.0-alpha.1/elasticsearch/[Elasticsearch-rs]
+link:https://www.elastic.co/elasticsearch/[Elasticsearch]
 
 === Local play
 
 Play Elasticsearch locally as follows:
 
 `docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.6.1`
+
+Play the server via:
+
+`cargo run`
+
+Make requests by using link:https://insomnia.rest/[insomnia] with the provided link:./insomnia[requests].
