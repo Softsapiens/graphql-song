@@ -1,0 +1,24 @@
+[package]
+name = "graphql-song"
+version = "0.1.0"
+authors = ["Dani Pous <dani.pous@gmail.com>"]
+description = ""
+license = ""
+documentation = ""
+repository = ""
+edition = "2018"
+
+[dependencies]
+serde_json = "1.0"
+url = "2"
+juniper = { git = "https://github.com/graphql-rust/juniper#91a33539", branch="master", features = ["expose-test-schema", "serde_json"] }
+juniper_hyper = { git = "https://github.com/graphql-rust/juniper#91a33539", branch="master" }
+tokio = "0.2"
+hyper = "0.13"
+futures = { version = "0.3" }
+pretty_env_logger = "0.4"
+reqwest = "0.10"
+
+[dev-dependencies.tokio]
+version = "0.2"
+features = ["macros"]
