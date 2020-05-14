@@ -9,7 +9,7 @@ This is a wip link:https://www.rust-lang.org/[Rust] project for link:https://gra
 
 == Tech-Stack
 
-Principal technologies used are the following:
+The project used technologies/principal libs are following:
 
 * link:https://www.rust-lang.org/[Rust] (stable)
 * link:https://docs.rs/hyper/0.13.5/hyper/[Hyper]
@@ -28,3 +28,10 @@ Play the server via:
 `cargo run`
 
 Make requests by using link:https://insomnia.rest/[insomnia] with the provided link:./insomnia[requests].
+
+
+== References
+
+. https://medium.com/@JeffLombardJr/when-and-why-to-use-graphql-24f6bce4839d
+. https://blog.logrocket.com/5-reasons-you-shouldnt-be-using-graphql-61c7846e7ed3/
+. https://graphql.org/learn/
