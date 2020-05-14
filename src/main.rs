@@ -1,11 +1,17 @@
+
 use hyper::{
     service::{make_service_fn, service_fn},
     Body, Method, Response, Server, StatusCode,
 };
 use juniper::{
-    tests::{model::Database, schema::Query},
     EmptyMutation, EmptySubscription, RootNode,
 };
+
+mod model;
+mod schema;
+
+use model::Database;
+use schema::Query;
 use std::sync::Arc;
 
 #[tokio::main]
