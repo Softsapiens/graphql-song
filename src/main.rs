@@ -14,13 +14,26 @@ use model::Database;
 use schema::Query;
 use std::sync::Arc;
 
+use elasticsearch::{
+    Elasticsearch,
+    http::transport::Transport
+};
+
 #[tokio::main]
 async fn main() {
     pretty_env_logger::init();
 
+    // GraphQL server endpoint
     let addr = ([127, 0, 0, 1], 3000).into();
 
-    let db = Arc::new(Database::new());
+    // ELS client construction
+    let transport = Transport::single_node("https://localhost:9200").unwrap();
+    let els = Elasticsearch::new(transport);
+
+    // Global database thread-shared
+    let db = Arc::new(Database::new(els));
+    
+    
     let root_node = Arc::new(RootNode::new(
         Query,
         EmptyMutation::<Database>::new(),

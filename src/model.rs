@@ -2,6 +2,10 @@
 
 use std::collections::HashMap;
 
+use elasticsearch::{
+    Elasticsearch,
+};
+
 #[derive(juniper::GraphQLEnum, Copy, Clone, Eq, PartialEq, Debug)]
 pub enum Episode {
     #[graphql(name = "NEW_HOPE")]
@@ -103,6 +107,7 @@ impl Droid for DroidData {
 pub struct Database {
     humans: HashMap<String, HumanData>,
     droids: HashMap<String, DroidData>,
+    els: Elasticsearch,
 }
 
 use juniper::{
@@ -177,7 +182,7 @@ impl DroidData {
 }
 
 impl Database {
-    pub fn new() -> Database {
+    pub fn new(els: Elasticsearch) -> Database {
         let mut humans = HashMap::new();
         let mut droids = HashMap::new();
 
@@ -265,7 +270,7 @@ impl Database {
             ),
         );
 
-        Database { humans, droids }
+        Database { humans, droids, els }
     }
 
     pub fn get_hero(&self, episode: Option<Episode>) -> &dyn Character {
