@@ -1,0 +1,13 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 10
+      arrivalRate: 500
+  defaults:
+    headers:
+      content-type: 'application/json'
+scenarios:
+  - flow:
+    - post:
+        url: "/graphql"
+        body: '{"query":"query heroQuery($HUMAN_ID: String!) {\n  human(id: $HUMAN_ID) {\n    id\n    name\n    appearsIn\n    friends {\n      id\n      name\n    }\n  }\n}\n","variables":{"HUMAN_ID":"1000"},"operationName":"heroQuery"}'
