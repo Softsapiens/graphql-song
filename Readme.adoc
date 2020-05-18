@@ -27,7 +27,8 @@ Play the server via:
 
 `cargo run`
 
-Make requests by using link:https://insomnia.rest/[insomnia] with the provided link:./insomnia[requests].
+Request could be made either by using some external tool like link:https://insomnia.rest/[insomnia] with the provided link:./insomnia[requests]
+Or by using the internal included link:http://localhost:3000/graphiql[GraphIQL].
 
 
 == Load Testing / Benchmarking
@@ -41,7 +42,7 @@ The test is link:./performance/graphql-song-load.yml[here].
 ```
 artillery run ./performance/graphql-song-load.yml
 ```
-See some results, requesting one query using 500 reqs/sec during 10 seconds:
+See some results in a HP-Zbook G4 laptop, requesting one Human object using 500 reqs/sec during 10 seconds:
 
 ```
 All virtual users finished
@@ -64,8 +65,25 @@ Summary report @ 17:19:57(+0200) 2020-05-14
 
 == References
 
+=== GraphQL to be or not to be
+
 . https://medium.com/@JeffLombardJr/when-and-why-to-use-graphql-24f6bce4839d
 . https://blog.logrocket.com/5-reasons-you-shouldnt-be-using-graphql-61c7846e7ed3/
+
+=== Specification
+
 . https://graphql.org/learn/
+
+=== Server internals
+
+. https://www.apollographql.com/blog/graphql-explained-5844742f195e
+. https://www.howtographql.com/advanced/1-server/
+
+=== Real use-cases
+
 . https://hasura.io/docs/1.0/graphql/manual/index.html
 . https://netflixtechblog.com/graphql-search-indexing-334c92e0d8d5
+
+=== Aggregations
+
+. https://hasura.io/docs/1.0/graphql/manual/queries/aggregation-queries.html

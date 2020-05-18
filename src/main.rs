@@ -54,6 +54,9 @@ async fn main() {
                         (&Method::GET, "/graphql") | (&Method::POST, "/graphql") => {
                             juniper_hyper::graphql(root_node, ctx, req).await
                         }
+                        (&Method::GET, "/graphiql") => {
+                            Ok(Response::new(Body::from(juniper::http::graphiql::graphiql_source("http://localhost:3000/graphql", None))))
+                        }
                         _ => {
                             let mut response = Response::new(Body::empty());
                             *response.status_mut() = StatusCode::NOT_FOUND;
