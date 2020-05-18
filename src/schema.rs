@@ -129,6 +129,38 @@ where
     }
 }
 
+#[derive(Debug, juniper::GraphQLInputObject)]
+#[graphql(description="A query for searching characters.")]
+struct QuerySpec {
+    #[graphql(description="Aggregation dimensions")]
+    dimensions: String,
+
+    #[graphql(description="The filter")]
+    filter: FilterOp,
+}
+
+#[derive(Debug, juniper::GraphQLInputObject)]
+#[graphql(description="Filter Value")]
+struct FilterValue {
+    attribute: String,
+    str_value: String
+}
+
+#[derive(Debug, juniper::GraphQLInputObject)]
+#[graphql(description="Filter Condition")]
+struct FilterCondition {
+    contains: Option<FilterValue>,
+    equal: Option<FilterValue>,
+}
+
+#[derive(Debug, juniper::GraphQLInputObject)]
+#[graphql(description="Filter Operation")]
+struct FilterOp {
+    and: Option<Vec<FilterOp>>,
+    or: Option<Vec<FilterOp>>,
+    not: Option<Vec<FilterOp>>,
+    condition: Option<FilterCondition>
+}
 
 pub struct Query;
 
@@ -177,6 +209,12 @@ impl Query {
         println!("{:#?}", info);
 
         Some(database.get_hero(episode).as_character())
+    }
+
+    fn search(executor: &Executor, database: &Database, q: QuerySpec) -> Vec<&dyn Human> {
+        println!("search request with q=[{:#?}]", q);
+
+        vec![]
     }
 
     // Gain access to the executor, which allows you to do look aheads, for example for improved database queries.
