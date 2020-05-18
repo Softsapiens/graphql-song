@@ -1,0 +1,85 @@
+= GrahpQL State of Art
+:toc:
+:toclevels: 2
+
+:checkedbox: pass:normal[&#10004;]
+:uncheckedbox: pass:normal[&#10005;]
+
+== Abstract
+
+An opinionated description of GraphQL use-cases.
+
+== Concepts
+
+Go to link:https://www.howtographql.com[here] to add more theorical detail.
+
+=== Definition
+
+GraphQL has been released only as a specification. This means that GraphQL is in fact not more than a long document that describes in detail the behaviour of a GraphQL server.
+
+=== The GraphQL holy grail: the Resolver approach
+
+The payload of a GraphQL query (or mutation or subscription) consists of a set of fields. In the GraphQL server implementation, each of these fields actually corresponds to exactly one function that’s called a _resolver_. The sole purpose of a resolver function is to fetch the data for its field.
+
+== Optimizations
+
+Real production GraphQL servers use batching and caching to reduce the number of requests to the backend and avoid making redundant ones. One graphql request could require N datasource access, and some of them could be redundant: think on a Blog, where you query for its posts and post's author information... probably, many posts will have the some author. A *dataloader* is the responsible to get all the requests from the same graphql-req and rationalize them.
+
+By the other hand, in order to improve queries against datasources, when a resolver is executed, it could access to the _look-ahead_ view of its payload AST so, for example, database queries could select a priori the desired fields in advance or could use joins to retrieve desired data in such an optimal way.
+
+== Opinion
+
+GraphQL goals are principally focused on helping the client side by reducing complexity. That, of course, has global benefits for the entire solution but in contrast perhaps add difficulties to some backend tasks. Some goodies for clients are:
+
+. Decoupling API interface from API Data sources using a well-defined typed Schema.
+. Reducing the number of required endpoints to the minimum, only 1, regarding how many data sources are queried.
+. Optimise client-server bandwith because client may ask for all the required data at once specifiying in details the required data.
+. Facilitate schema evolution without api versioning. Thanks to '@deprecated' mark, schema deletes will only affect client's queries using it and could be managed in a grateful manner. Schema additions will be always transparent.
+. Schema introspection gives a powerful tool for client developing.
+. Standarize a way to query, mutate or subscribe to data.
+
+In contrast, at the backend side:
+
+a. The solution by using _resolvers_ is at least as much powerful as REST, IMHO.
+b. Avoiding either the 1+N problem or redundant/duplicated executions require external complementary solutions/strategies, as for example link:https://graphql-rust.github.io/juniper/master/advanced/dataloaders.html[DataLoaders].
+c. Subscriptions are built-in by default. Read link:https://graphql-rust.github.io/juniper/master/advanced/subscriptions.html[here].
+
+.Table API solutions Comparative
+|===
+| Point |REST |GraphQL
+
+| Schema out of the box
+| {uncheckedbox}
+| {checkedbox}
+
+| Query optimizations
+| [{uncheckedbox}] Out of the standard
+| [{checkedbox}] field selection as built-in
+
+| All in one solution: queries/mutations/subscriptions
+| [{uncheckedbox}] Up to you
+| {checkedbox}
+
+| Community size/Resource availability
+| [{checkedbox}] Commonly more used
+| [{uncheckedbox}] Growing but not so extended
+
+| Requests parameters standarization
+| [{uncheckedbox}] Available, but Up to you
+| [{checkedbox}] Included in the API schema out-of-the-box
+
+| Domain level tools/facilities
+| {uncheckedbox}
+| {checkedbox}
+
+| Authorization/Authentication
+| {checkedbox}
+| {checkedbox}
+
+| Multi Entity APIs
+| More coupled & require multiple endpoints
+| Totally decoupled, always only 1 endpoint
+
+| Realtime
+| [{uncheckedbox}] Up to you
+| [{checkedbox}] Solved by Subscriptions

@@ -63,6 +63,11 @@ Summary report @ 17:19:57(+0200) 2020-05-14
     200: 5000
 ```
 
+== My Review
+
+Read link:./docs/state-of-art.adoc[here] my own state-of-art of GraphQL.
+
+
 == References
 
 === GraphQL to be or not to be
