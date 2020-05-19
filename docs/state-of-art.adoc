@@ -64,7 +64,7 @@ c. Subscriptions are built-in by default. Read link:https://graphql-rust.github.
 | [{checkedbox}] Commonly more used
 | [{uncheckedbox}] Growing but not so extended
 
-| Requests parameters standarization
+| Requests parameters standarization/validation
 | [{uncheckedbox}] Available, but Up to you
 | [{checkedbox}] Included in the API schema out-of-the-box
 
@@ -83,3 +83,11 @@ c. Subscriptions are built-in by default. Read link:https://graphql-rust.github.
 | Realtime
 | [{uncheckedbox}] Up to you
 | [{checkedbox}] Solved by Subscriptions
+
+| Errors
+| [{checkedbox}] HTTP status to the rescue
+| [{checkedbox}] Included in the standard vi _errors_ response field.
+
+| Strict comunication 
+| [{uncheckedbox}] Design decision
+| [{checkedbox}] Totally: schema defines exactly what data is required
