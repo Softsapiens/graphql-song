@@ -38,11 +38,16 @@ GraphQL goals are principally focused on helping the client side by reducing com
 . Schema introspection gives a powerful tool for client developing.
 . Standarize a way to query, mutate or subscribe to data.
 
-In contrast, at the backend side:
+And the backend side gets:
 
 a. The solution by using _resolvers_ is at least as much powerful as REST, IMHO.
 b. Avoiding either the 1+N problem or redundant/duplicated executions require external complementary solutions/strategies, as for example link:https://graphql-rust.github.io/juniper/master/advanced/dataloaders.html[DataLoaders].
 c. Subscriptions are built-in by default. Read link:https://graphql-rust.github.io/juniper/master/advanced/subscriptions.html[here].
+
+
+As general conclusion, GraphQL could be seen as a 'layer over' REST. REST is theorically oriented to entities, but GraphQL is totally business-domain oriented, so every graphql request is focused on business actions, and not on entities actions. GraphQL embraces atomicity at business-domain.
+
+GraphQL gives us an schema specification language to model the business requirements, and incorporates as built-in all the requirements for getting a solution all the way down.
 
 .Table API solutions Comparative
 |===
@@ -52,9 +57,13 @@ c. Subscriptions are built-in by default. Read link:https://graphql-rust.github.
 | {uncheckedbox}
 | {checkedbox}
 
-| Query optimizations
-| [{uncheckedbox}] Out of the standard
-| [{checkedbox}] field selection as built-in
+| Focused on...
+| Entities
+| Business-Domain
+
+| Query Efficiency
+| Up-to-you (adding 'extra' custom parameters)
+| field-selection as first-class feature)
 
 | All in one solution: queries/mutations/subscriptions
 | [{uncheckedbox}] Up to you
@@ -88,6 +97,18 @@ c. Subscriptions are built-in by default. Read link:https://graphql-rust.github.
 | [{checkedbox}] HTTP status to the rescue
 | [{checkedbox}] Included in the standard vi _errors_ response field.
 
-| Strict comunication 
+| Strict comunication upfront
 | [{uncheckedbox}] Design decision
-| [{checkedbox}] Totally: schema defines exactly what data is required
+| [{checkedbox}] Totally: schema defines exactly what data is managed
+
+| Idempotency
+| [{checkedbox}] at entity level
+| [{checkedbox}] at business-domain level
+
+| Introspection
+| [{uncheckedbox}]
+| [{checkedbox}] by default, built-in
+
+| Atomicity
+| Only at entity level
+| By default at business-domain level
